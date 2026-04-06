@@ -1,73 +1,162 @@
-# React + TypeScript + Vite
+# 🐒 Monkey Wears – Ecommerce UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive ecommerce homepage built using **React** and **Tailwind CSS**.
+This project serves as a frontend foundation for a fashion apparel store.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+- 🛍️ Responsive ecommerce homepage
+- 📱 Mobile-first design
+- 🎨 Styled with Tailwind CSS
+- 🧩 Component-based React architecture
+- 🛒 Product listing UI
+- 📦 Category sections
+- 📢 Promotional banner
+- 🔻 Footer with navigation links
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React**
+- **Tailwind CSS**
+- **JavaScript (ES6+)**
+- **Vite / Create React App** (depending on setup)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📂 Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+│── components/
+│   ├── Navbar.jsx
+│   ├── Footer.jsx
+│   ├── ProductCard.jsx
+│
+│── pages/
+│   ├── Home.jsx
+│
+│── assets/
+│   ├── images/
+│
+│── App.jsx
+│── main.jsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/monkey-wears.git
+cd monkey-wears
+```
+
+---
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 3. Run the development server
+
+```bash
+npm run dev
+```
+
+App will be available at:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🎨 Tailwind Setup (if needed)
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+Add this to `tailwind.config.js`:
 
 ```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 ```
+
+Add to `index.css`:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+---
+
+## 🖼️ Images Handling
+
+- Static images → `public/images`
+- Dynamic images → from API (e.g., S3 URLs)
+
+Example:
+
+```jsx
+<img src={product.image} alt={product.name} />
+```
+
+---
+
+## 🔥 Future Improvements
+
+- 🛒 Add cart functionality (Context API / Zustand)
+- 🔐 Authentication (Login/Signup)
+- 🌐 Backend integration (API Gateway + Lambda)
+- ☁️ Image hosting via AWS S3
+- ⚡ Lazy loading & performance optimization
+- ❤️ Wishlist feature
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repo
+2. Create a new branch
+3. Commit your changes
+4. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## 👨‍💻 Author
+
+**Rishabh Srivastava**
+
+---
+
+## ⭐ Acknowledgements
+
+- Tailwind CSS Docs
+- React Docs
+- Font Awesome (for icons)
+
+---
+
+> Built with ❤️ for learning and scaling into a full ecommerce platform.
