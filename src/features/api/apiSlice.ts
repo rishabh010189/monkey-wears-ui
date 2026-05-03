@@ -10,7 +10,15 @@ export const apiSlice = createApi({
     getProducts: builder.query<IProduct[], void>({
       query: () => '/products',
     }),
+    getProductsByCategory: builder.query<IProduct[], string>({
+      query: (category) => {
+        return {
+          url: `/products?category=${category}`,
+          method: 'GET',
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = apiSlice;
+export const { useGetProductsQuery, useGetProductsByCategoryQuery } = apiSlice;
