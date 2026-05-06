@@ -5,9 +5,8 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   const BASE_URL = 'https://d2n41bjlvqia14.cloudfront.net'; // CloudFront/S3 base
   const item = product.variants[0];
   const posterImg = item.images[0];
-  console.log(posterImg);
 
-  const link = `/pd/${product.id}`;
+  const link = `/productDetails/${product.id}`;
 
   return (
     <Link to={link}>

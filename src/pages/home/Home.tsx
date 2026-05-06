@@ -1,11 +1,18 @@
 import Banner from '../../components/banner-carousel/BannerCarousel';
 import ProductCard from '../../components/product-card/ProductCard';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
+import logo from '../../assets/img/monkey-wears-logo.png';
 
 const Home = () => {
   const { data, isLoading, error } = useGetProductsQuery();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-[60vh]">
+        {/* <div className="w-12 h-12 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div> */}
+        <img src={logo} className="w-24 animate-spin" />
+      </div>
+    );
   if (error) return <p>Error occurred</p>;
   console.log(data);
   return (

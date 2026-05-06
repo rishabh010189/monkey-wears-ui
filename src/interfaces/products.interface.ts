@@ -11,10 +11,10 @@ export interface IProduct {
   gender: string;
   productCategory: string;
   tags: string[];
-  variants: Variant[];
+  variants: IVariant[];
 }
 
-export interface Variant {
+export interface IVariant {
   id: string;
   sku: string;
   color: string;
