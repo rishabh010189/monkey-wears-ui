@@ -5,6 +5,7 @@ import Header from './components/header/header';
 import Home from './pages/home/Home';
 import ProductListing from './pages/productListing/ProductListing';
 import ProductDetails from './pages/product-details/ProductDetails';
+import PageNotFound from './pages/page-not-found/PageNotFound';
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductListing />} />
         <Route path="/productDetails/:id" element={<ProductDetails />} />
+        {/* 404 fallback */}
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
 
       {/* Footer */}

@@ -32,7 +32,9 @@ const ProductDetails = () => {
         {/* RIGHT: Product Info */}
         <div className="space-y-6">
           {/* Title */}
-          <h1 className="text-2xl font-semibold">{product.name}</h1>
+          <h1 className="text-2xl font-semibold">
+            {product.name} : {effectiveVariant.modelName}
+          </h1>
 
           {/* Price */}
           <div className="flex items-center gap-3">

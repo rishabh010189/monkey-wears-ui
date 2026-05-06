@@ -4,20 +4,19 @@ import 'swiper/css/navigation';
 
 import { Navigation, Autoplay } from 'swiper/modules';
 
-const BannerCarousel = () => {
+const BannerCarousel = ({ category = 'home' }: { category?: string }) => {
+  const BASE_URL = 'https://d2n41bjlvqia14.cloudfront.net';
+
   return (
     <div className="w-full overflow-hidden">
       <Swiper modules={[Navigation, Autoplay]} navigation autoplay={{ delay: 3000 }} loop>
-        <SwiperSlide>
-          <div className="flex justify-center items-center">
-            <img src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/homepage_1_1_Qzig4te.jpg?w=1500&dpr=1" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex justify-center items-center">
-            <img src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/homepage_1_qqu8zra.jpg?w=1500&dpr=1" />
-          </div>
-        </SwiperSlide>
+        {[1, 2, 3].map((i) => (
+          <SwiperSlide>
+            <div className="flex justify-center items-center">
+              <img src={`${BASE_URL}/banner/${category}/banner_${i}.avif`} />
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

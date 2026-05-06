@@ -20,7 +20,7 @@ const ImageGallery = ({
           selectedVariant.images.map((img, idx) => (
             <img
               key={idx}
-              src={`${BASE_URL}/${img}`}
+              src={`${BASE_URL}/images/${img}`}
               alt=""
               onClick={() => setSelectedImage(img)}
               className={`w-16 h-20 object-cover rounded cursor-pointer border ${
@@ -33,7 +33,7 @@ const ImageGallery = ({
       {/* Main Image */}
       <div className="flex-1">
         <img
-          src={`${BASE_URL}/${mainImage}`}
+          src={`${BASE_URL}/images/${mainImage}`}
           alt={product.name}
           className="w-full  object-cover rounded-xl"
         />

@@ -14,7 +14,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         {/* Image */}
         <div className="relative w-full h-64 overflow-hidden">
           <img
-            src={`${BASE_URL}/${posterImg}`}
+            src={`${BASE_URL}/images/${posterImg}`}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />

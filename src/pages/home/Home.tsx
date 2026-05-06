@@ -1,7 +1,7 @@
 import Banner from '../../components/banner-carousel/BannerCarousel';
 import ProductCard from '../../components/product-card/ProductCard';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
-import logo from '../../assets/img/monkey-wears-logo.png';
+import logo from '../../assets/img/logo-small.png';
 
 const Home = () => {
   const { data, isLoading, error } = useGetProductsQuery();
