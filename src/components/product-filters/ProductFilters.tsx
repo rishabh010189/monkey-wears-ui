@@ -3,12 +3,15 @@ import type { IProductFilters } from '../../interfaces/productFilter.interface';
 
 const ProductFilters = ({
   filters,
+  renderOnOverlay = false,
   setFilters,
 }: {
   filters: IProductFilters;
+  renderOnOverlay?: boolean;
   setFilters: Dispatch<SetStateAction<IProductFilters>>;
 }) => {
   const [price, setPrice] = useState([0, 2000]);
+  const PRODUCT_CATEGORIES = ['all', 'joggers', 'shirt', 't-shirt'];
 
   const toggleSize = (size: string) => {
     setFilters((prev) => {
@@ -21,15 +24,17 @@ const ProductFilters = ({
   };
 
   return (
-    <div className="w-full md:w-64 p-4 border-r space-y-6 sticky top-20 h-fit">
+    <div
+      className={`w-full md:w-64 space-y-6 pr-4 sticky top-20 h-fit ${!renderOnOverlay && 'border-r border-gray-300'}`}
+    >
       {/* Title */}
-      <h2 className="text-lg font-semibold">Filters</h2>
+      {!renderOnOverlay && <h2 className="text-lg font-semibold">Filters</h2>}
 
       {/* Category */}
       <div>
         <p className="font-medium mb-2">Category</p>
         <div className="space-y-2">
-          {['men', 'women'].map((cat) => (
+          {PRODUCT_CATEGORIES.map((cat) => (
             <label key={cat} className="flex items-center gap-2 cursor-pointer">
               <input
                 type="radio"

@@ -1,23 +1,10 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetProductDetailsByIdQuery } from '../../features/api/apiSlice';
+import AddToCart from '../../components/add-to-cart/AddToCart';
 import ImageGallery from '../../components/image-gallery/ImageGallery';
-import type { IVariant } from '../../interfaces/products.interface';
 import ProductDetailsSkeleton from '../../components/product-details-skeleton/ProductDetailsSkeleton';
+import useProductDetails from '../../hooks/product-details/useProductDetails';
 
 const ProductDetails = () => {
-  const { id } = useParams();
-  const {
-    data: product,
-    isLoading,
-    error,
-  } = useGetProductDetailsByIdQuery(id!, {
-    skip: !id,
-  });
-
-  const [selectedVariant, setSelectedVariant] = useState<IVariant>();
-
-  const effectiveVariant = selectedVariant ?? product?.variants?.[0];
+  const { error, effectiveVariant, isLoading, product, setSelectedVariant } = useProductDetails();
 
   if (isLoading) return <ProductDetailsSkeleton />;
   if (error) return <p>Error occurred</p>;
@@ -63,13 +50,13 @@ const ProductDetails = () => {
             </div>
           </div>
 
+          {/* Size */}
+          <div className="flex">
+            <p className="font-medium mb-2">Size : {effectiveVariant.size}</p>
+          </div>
+
           {/* Add to Cart */}
-          <button
-            className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 disabled:opacity-50"
-            onClick={() => console.log('Add to cart', product, effectiveVariant)}
-          >
-            Add to Cart
-          </button>
+          <AddToCart effectiveVariant={effectiveVariant} product={product} />
 
           {/* Extra Info */}
           <div className="text-sm text-gray-500 space-y-1">

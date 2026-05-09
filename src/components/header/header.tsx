@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className="bg-white shadow-md min-h-[70px] flex">
       <div className="flex w-full justify-between items-center h-full">
-        <div className="w-5/12">
+        <div className="hidden lg:block w-5/12">
           <ul className="flex gap-4 px-2">
             <Link
               className="font-bold text-xl p-4 border-b-4 border-transparent hover:border-red-500 cursor-pointer"
