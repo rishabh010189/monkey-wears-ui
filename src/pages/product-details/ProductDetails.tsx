@@ -40,7 +40,7 @@ const ProductDetails = () => {
             <div className="flex gap-2">
               {product.variants.map((v) => (
                 <button
-                  key={v.id}
+                  key={v.vid}
                   onClick={() => setSelectedVariant(v)}
                   className={`px-4 py-2 border rounded-lg ${
                     effectiveVariant === v ? 'bg-black text-white' : 'bg-white'

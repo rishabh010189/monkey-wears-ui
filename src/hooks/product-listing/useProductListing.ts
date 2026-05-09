@@ -11,8 +11,6 @@ const useProductListing = () => {
     skip: !category,
   });
 
-  console.log(filters);
-
   const filteredProducts = useMemo(() => {
     if (!data) return [];
 

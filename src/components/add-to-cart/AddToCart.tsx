@@ -8,33 +8,24 @@ const AddToCart = ({
   effectiveVariant: IVariant;
   product: IProduct;
 }) => {
-  const { addToCartBtnHandler, buttonColors, btnColor, setSelectedQty } = useAddToCart({
+  const { addToCartBtnHandler, buttonColors, btnColor, qtyAdded } = useAddToCart({
     effectiveVariant,
     product,
   });
 
   return (
-    <div className="flex gap-4">
-      <div className="flex items-center gap-2 border-r border-gray-300 pr-4 w-36">
-        <p className="font-medium mb-2">Qty</p>
-        <select
-          className="w-full border rounded-md p-2"
-          onChange={(e) => setSelectedQty(+e.target.value)}
-        >
-          {[...Array(9)].map((_, i: number) => (
-            <option disabled={i + 1 > effectiveVariant.stock} key={i + 1} value={i + 1}>
-              {i + 1}
-            </option>
-          ))}
-        </select>
-      </div>
-      <button
-        className={`w-full text-white py-3 rounded-lg disabled:opacity-50 ${buttonColors[btnColor]}`}
-        onClick={addToCartBtnHandler}
-      >
-        Add to Cart
-      </button>
-    </div>
+    <button
+      className={`w-full text-white py-3 rounded-lg disabled:opacity-50 ${buttonColors[btnColor]} flex items-center justify-center`}
+      disabled={qtyAdded >= effectiveVariant.stock}
+      onClick={addToCartBtnHandler}
+    >
+      {qtyAdded > 0 && (
+        <span className="bg-black text-xs text-white rounded-full mr-2 w-6 h-6 inline-flex justify-center items-center">
+          {qtyAdded}
+        </span>
+      )}
+      Add to Cart
+    </button>
   );
 };
 

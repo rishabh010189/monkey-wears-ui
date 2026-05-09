@@ -15,7 +15,7 @@ export interface IProduct {
 }
 
 export interface IVariant {
-  id: string;
+  vid: string;
   sku: string;
   color: string;
   size: string;

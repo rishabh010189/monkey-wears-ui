@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { apiSlice } from '../features/api/apiSlice';
 import cartSlice from '../features/cart/cartSlice';
+import { saveState } from '../features/storage';
 
 export const store = configureStore({
   reducer: {
@@ -8,6 +9,11 @@ export const store = configureStore({
     [cartSlice.reducerPath]: cartSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+});
+
+store.subscribe(() => {
+  const state = store.getState();
+  saveState('cart', state.cart);
 });
 
 // types (important for TS)
