@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import type { IProductFilters } from '../../interfaces/productFilter.interface';
-import { useGetProductsByCategoryQuery } from '../../features/api/apiSlice';
+import { useGetProductsByCategoryQuery } from '../../features/api/endpoints/products.api';
 
 const useProductListing = () => {
   const [searchParams] = useSearchParams();

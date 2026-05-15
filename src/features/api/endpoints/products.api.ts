@@ -1,14 +1,11 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { IProduct } from '../../interfaces/products.interface';
+import type { IProduct } from '../../../interfaces/products.interface';
+import { baseApi } from '../baseApi';
 
-export const apiSlice = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_BASE_URL, // replace with your API Gateway later
-  }),
+export const productsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query<IProduct[], void>({
       query: () => '/products',
+      providesTags: ['products'],
     }),
     getProductsByCategory: builder.query<IProduct[], string>({
       query: (category) => {
@@ -17,6 +14,7 @@ export const apiSlice = createApi({
           method: 'GET',
         };
       },
+      providesTags: (_result, _error, id) => [{ type: 'products', id }],
     }),
     getProductDetailsById: builder.query<IProduct, string>({
       query: (productId) => {
@@ -30,4 +28,4 @@ export const apiSlice = createApi({
 });
 
 export const { useGetProductsQuery, useGetProductsByCategoryQuery, useGetProductDetailsByIdQuery } =
-  apiSlice;
+  productsApi;

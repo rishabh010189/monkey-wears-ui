@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
-import { useGetProductDetailsByIdQuery } from '../../features/api/apiSlice';
 import { useState } from 'react';
 import type { IVariant } from '../../interfaces/products.interface';
+import { useGetProductDetailsByIdQuery } from '../../features/api/endpoints/products.api';
 
 const useProductDetails = () => {
   const { id } = useParams();

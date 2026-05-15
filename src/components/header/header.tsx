@@ -1,7 +1,8 @@
 import logo from '../../assets/img/monkey-wears-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import FancySearch from '../fancy-search/FancySearch';
 
 const Header = () => {
   return (
@@ -29,19 +30,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="w-5/12 justify-end items-center flex">
-          <div className="relative mr-4">
-            <input
-              name="search"
-              id="search"
-              type="text"
-              className="border border-gray-500 h-10 w-72 px-4 pr-10 rounded-4xl"
-              placeholder="What's on your mind today?"
-            />
-            <FontAwesomeIcon
-              icon={faMagnifyingGlass}
-              className="text-lg text-gray-500 absolute right-3 top-3"
-            />
-          </div>
+          <FancySearch />
           <FontAwesomeIcon icon={faUser} className="text-lg cursor-pointer px-2" />
           <FontAwesomeIcon icon={faCartShopping} className="text-lg cursor-pointer px-2" />
         </div>

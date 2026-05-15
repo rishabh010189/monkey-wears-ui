@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { apiSlice } from '../features/api/apiSlice';
+import { baseApi } from '../features/api/baseApi';
 import cartSlice from '../features/cart/cartSlice';
 import { saveState } from '../features/storage';
 
 export const store = configureStore({
   reducer: {
-    [apiSlice.reducerPath]: apiSlice.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
     [cartSlice.reducerPath]: cartSlice.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
 });
 
 store.subscribe(() => {
