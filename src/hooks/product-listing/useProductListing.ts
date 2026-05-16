@@ -1,15 +1,14 @@
 import { useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import type { IProductFilters } from '../../interfaces/productFilter.interface';
-import { useGetProductsByCategoryQuery } from '../../features/api/endpoints/products.api';
+import useConditionalFetch from './useConditionalFetch';
 
 const useProductListing = () => {
-  const [searchParams] = useSearchParams();
-  const category = searchParams.get('category') || '';
   const [filters, setFilters] = useState<IProductFilters>({});
-  const { data, isLoading, error } = useGetProductsByCategoryQuery(category, {
-    skip: !category,
-  });
+
+  const {
+    category,
+    query: { data, isLoading, error },
+  } = useConditionalFetch();
 
   const filteredProducts = useMemo(() => {
     if (!data) return [];

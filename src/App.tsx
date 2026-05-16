@@ -17,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductListing />} />
         <Route path="/productDetails/:id" element={<ProductDetails />} />
+        <Route path="/search/" element={<ProductListing />} />
         {/* 404 fallback */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>

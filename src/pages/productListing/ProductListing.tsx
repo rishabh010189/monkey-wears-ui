@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import Popup from '../../components/popup/Popup';
 import { useState } from 'react';
+import emptyWardrobe from '../../../assets/img/empty_wardrobe.png';
 
 const ProductListing = () => {
   const { category, data, error, filters, isLoading, setFilters } = useProductListing();
@@ -44,9 +45,18 @@ const ProductListing = () => {
                 </>
               )}
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {data && data.map((item) => <ProductCard key={item.id} product={item} />)}
-            </div>
+            {data && data.length ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {data &&
+                  data.length &&
+                  data.map((item) => <ProductCard key={item.id} product={item} />)}
+              </div>
+            ) : (
+              <div className="w-full mt-24 justify-items-center items-center flex-column">
+                <img src={emptyWardrobe} className="w-2xs" />
+                <div>Oops! seems like we ran out of style</div>
+              </div>
+            )}
           </section>
         </div>
       </div>
