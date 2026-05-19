@@ -15,6 +15,7 @@ const AddToCart = ({
 
   return (
     <button
+      aria-label="add-to-cart-btn"
       className={`w-full text-white py-3 rounded-lg disabled:opacity-50 ${buttonColors[btnColor]} flex items-center justify-center`}
       disabled={qtyAdded >= effectiveVariant.stock}
       onClick={addToCartBtnHandler}

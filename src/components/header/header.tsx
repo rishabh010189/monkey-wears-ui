@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import FancySearch from '../fancy-search/FancySearch';
+import useHeader from '../../hooks/header/useHeader';
 
 const Header = () => {
+  const { cartCount } = useHeader();
   return (
     <header className="bg-white shadow-md min-h-[70px] flex">
       <div className="flex w-full justify-between items-center h-full">
@@ -31,8 +33,21 @@ const Header = () => {
         </div>
         <div className="w-5/12 justify-end items-center flex">
           <FancySearch />
-          <FontAwesomeIcon icon={faUser} className="text-lg cursor-pointer px-2" />
-          <FontAwesomeIcon icon={faCartShopping} className="text-lg cursor-pointer px-2" />
+          <FontAwesomeIcon
+            aria-label="my-profile"
+            icon={faUser}
+            className="text-lg cursor-pointer px-2"
+          />
+          <Link to="/cart">
+            <div className="relative cursor-pointer" aria-label="checkout-button">
+              <FontAwesomeIcon icon={faCartShopping} className="text-lg cursor-pointer px-2" />
+              {cartCount > 0 && (
+                <div className="absolute bg-red-500 rounded-full w-[20px] h-[20px] items-center justify-center text-white text-xs text-center top-[10px] left-[-2px]">
+                  {cartCount}
+                </div>
+              )}
+            </div>
+          </Link>
         </div>
       </div>
     </header>

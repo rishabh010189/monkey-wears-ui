@@ -22,6 +22,18 @@ const cartSlice = createSlice({
       }
     },
 
+    changeQty: (state, action: PayloadAction<{ item: ICartItem; qty: number }>) => {
+      const existingItem = state.items.find((item) => item.id === action.payload.item.id);
+      if (existingItem) {
+        if (action.payload.qty == 1) {
+          existingItem.qtyOrdered += 1;
+        }
+        if (action.payload.qty == -1) {
+          existingItem.qtyOrdered -= 1;
+        }
+      }
+    },
+
     removeFromCart: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
@@ -32,6 +44,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, changeQty, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice;
