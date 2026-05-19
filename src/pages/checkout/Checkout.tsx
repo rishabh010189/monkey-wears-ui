@@ -1,64 +1,61 @@
-export default function Checkout() {
-  const cartItems = [
-    {
-      id: 1,
-      name: 'Urban Oversized Tee',
-      size: 'L',
-      color: 'Black',
-      qty: 1,
-      price: 1299,
-      image:
-        'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=400&auto=format&fit=crop',
-    },
-    {
-      id: 2,
-      name: 'Street Cargo Joggers',
-      size: 'M',
-      color: 'Olive',
-      qty: 1,
-      price: 1899,
-      image:
-        'https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=400&auto=format&fit=crop',
-    },
-  ];
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import fastDelivery from '../../../assets/img/fast-delivery-icon.webp';
+import useCheckout from '../../hooks/checkout/useCheckout';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+const BASE_URL = 'https://d2n41bjlvqia14.cloudfront.net'; // CloudFront/S3 base
 
-  const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
-  const shipping = 99;
-  const discount = 250;
-  const total = subtotal + shipping - discount;
+export default function Checkout() {
+  const {
+    cartItems,
+    discount,
+    qtyChangeHandler,
+    removeProductHandler,
+    selectedPayment,
+    setSelectedPayment,
+    shipping,
+    subtotal,
+    total,
+  } = useCheckout();
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-8 lg:px-12">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-black tracking-tight md:text-4xl">
-              Monkey Wears Checkout
-            </h1>
-            <p className="mt-2 text-sm text-zinc-400">Secure your drip before it disappears.</p>
+            <h1 className="text-3xl font-black tracking-tight md:text-4xl">Check-it-out</h1>
+            <p className="mt-2 text-sm text-zinc-800">Secure your drip before it disappears.</p>
           </div>
 
-          <div className="hidden items-center gap-3 rounded-full border border-zinc-800 bg-zinc-900/60 px-5 py-2 md:flex">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-lime-400 text-sm font-bold text-black">
-              1
-            </div>
-            <span className="text-sm font-medium text-lime-300">Cart</span>
+          <div className="hidden items-center gap-3 rounded-full border border-zinc-800 bg-zinc-900 px-5 py-2 md:flex">
+            <Link to="/cart">
+              <div className="flex items-center gap-3 cursor-pointer">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-pink-400 text-sm font-bold text-black">
+                  1
+                </div>
+                <span className="text-sm font-medium text-pink-300">Cart</span>
+              </div>
+            </Link>
             <div className="h-px w-10 bg-zinc-700" />
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-lime-400 text-sm font-bold text-black">
-              2
+            <div className="flex items-center gap-3 cursor-pointer">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-pink-400 text-sm font-bold text-black">
+                2
+              </div>
+              <span className="text-sm font-medium text-pink-300">Checkout</span>
             </div>
-            <span className="text-sm font-medium text-lime-300">Checkout</span>
             <div className="h-px w-10 bg-zinc-700" />
-            <div className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-700 text-sm font-bold text-zinc-400">
-              3
+            <div className="flex items-center gap-3 cursor-pointer">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-700 text-sm font-bold text-zinc-400">
+                3
+              </div>
+              <span className="text-sm text-zinc-500">Payment</span>
             </div>
-            <span className="text-sm text-zinc-500">Payment</span>
           </div>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.75fr]">
           <div className="space-y-6">
-            <section className="rounded-3xl border border-zinc-800 bg-zinc-900/60 p-6 shadow-2xl shadow-black/20 backdrop-blur">
+            <section className="rounded-2xl border border-zinc-800 p-6 backdrop-blur">
               <div className="mb-6 flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-bold">Contact Details</h2>
@@ -66,29 +63,24 @@ export default function Checkout() {
                     Updates about your order will be sent here.
                   </p>
                 </div>
-                <div className="rounded-full bg-lime-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-lime-300">
-                  Fast Delivery
-                </div>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
-                <Input label="First Name" placeholder="Rishabh" />
-                <Input label="Last Name" placeholder="Srivastava" />
+                <Input label="First Name" placeholder="Your good name" />
+                <Input label="Last Name" placeholder="Your good surname" />
                 <div className="md:col-span-2">
                   <Input label="Email" placeholder="you@example.com" />
                 </div>
                 <div className="md:col-span-2">
-                  <Input label="Phone Number" placeholder="+91 98765 43210" />
+                  <Input label="Phone Number" placeholder="+91 9876543210" />
                 </div>
               </div>
             </section>
 
-            <section className="rounded-3xl border border-zinc-800 bg-zinc-900/60 p-6 shadow-2xl shadow-black/20 backdrop-blur">
+            <section className="rounded-2xl border border-zinc-800 p-6 backdrop-blur">
               <div className="mb-6">
                 <h2 className="text-xl font-bold">Shipping Address</h2>
-                <p className="mt-1 text-sm text-zinc-400">
-                  We ship across India with live tracking.
-                </p>
+                <p className="mt-1 text-sm text-zinc-400">Your drip will be dropped here.</p>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
@@ -96,31 +88,17 @@ export default function Checkout() {
                   <Input label="Address Line" placeholder="House no, street, locality" />
                 </div>
 
-                <Input label="City" placeholder="Meerut" />
-                <Input label="State" placeholder="Uttar Pradesh" />
-                <Input label="PIN Code" placeholder="250001" />
+                <Input label="City" placeholder="Gurgaon" />
+                <Input label="State" placeholder="Haryana" />
+                <Input label="PIN Code" placeholder="122017" />
 
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-zinc-300">
-                    Delivery Type
-                  </label>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <button className="rounded-2xl border border-lime-400 bg-lime-400/10 p-3 text-left transition hover:bg-lime-400/20">
-                      <div className="text-sm font-semibold text-lime-300">Standard</div>
-                      <div className="mt-1 text-xs text-zinc-400">3-5 business days</div>
-                    </button>
-
-                    <button className="rounded-2xl border border-zinc-700 bg-zinc-950 p-3 text-left transition hover:border-zinc-500">
-                      <div className="text-sm font-semibold">Express</div>
-                      <div className="mt-1 text-xs text-zinc-400">1-2 business days</div>
-                    </button>
-                  </div>
+                <div className="flex justify-end items-center">
+                  <img src={fastDelivery} className="w-20 h-20" />
                 </div>
               </div>
             </section>
 
-            <section className="rounded-3xl border border-zinc-800 bg-zinc-900/60 p-6 shadow-2xl shadow-black/20 backdrop-blur">
+            <section className="rounded-2xl border border-zinc-800 p-6 backdrop-blur">
               <div className="mb-6 flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-bold">Payment Method</h2>
@@ -129,36 +107,47 @@ export default function Checkout() {
                   </p>
                 </div>
 
-                <div className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-300">
+                <div className="rounded-full border border-zinc-700 px-3 py-1 bg-zinc-950 text-xs text-white">
                   100% Secure
                 </div>
               </div>
 
               <div className="space-y-4">
                 <PaymentCard
+                  id={0}
                   title="UPI / Wallets"
+                  selectedPayment={selectedPayment}
+                  setSelectedPayment={setSelectedPayment}
                   subtitle="Pay using Google Pay, PhonePe, Paytm"
-                  active
                 />
 
                 <PaymentCard
+                  id={1}
                   title="Credit / Debit Card"
+                  selectedPayment={selectedPayment}
+                  setSelectedPayment={setSelectedPayment}
                   subtitle="Visa, Mastercard, RuPay accepted"
                 />
 
-                <PaymentCard title="Cash on Delivery" subtitle="Pay once your order arrives" />
+                <PaymentCard
+                  id={2}
+                  title="Cash on Delivery"
+                  selectedPayment={selectedPayment}
+                  setSelectedPayment={setSelectedPayment}
+                  subtitle="Pay once your order arrives"
+                />
               </div>
             </section>
           </div>
 
-          <aside className="h-fit rounded-3xl border border-zinc-800 bg-zinc-900/70 p-6 shadow-2xl shadow-black/30 backdrop-blur lg:sticky lg:top-6">
+          <aside className="h-fit rounded-2xl border border-zinc-800 bg-white p-6 backdrop-blur lg:sticky lg:top-6">
             <div className="mb-6 flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-black">Order Summary</h2>
                 <p className="mt-1 text-sm text-zinc-400">{cartItems.length} items in cart</p>
               </div>
 
-              <div className="rounded-full bg-lime-400 px-3 py-1 text-xs font-bold uppercase tracking-wide text-black">
+              <div className="rounded-full bg-pink-400 px-3 py-1 text-xs font-bold uppercase tracking-wide text-black">
                 Monkey Verified
               </div>
             </div>
@@ -167,10 +156,10 @@ export default function Checkout() {
               {cartItems.map((item) => (
                 <div
                   key={item.id}
-                  className="flex gap-4 rounded-2xl border border-zinc-800 bg-zinc-950/70 p-3"
+                  className="flex gap-4 rounded-2xl border border-zinc-800 bg-zinc-950 text-white p-3"
                 >
                   <img
-                    src={item.image}
+                    src={`${BASE_URL}/images/${item.images[0]}`}
                     alt={item.name}
                     className="h-24 w-20 rounded-xl object-cover"
                   />
@@ -178,8 +167,10 @@ export default function Checkout() {
                   <div className="flex flex-1 flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between gap-3">
-                        <h3 className="font-semibold leading-tight">{item.name}</h3>
-                        <span className="text-sm font-bold text-lime-300">₹{item.price}</span>
+                        <h3 className="font-semibold leading-tight">
+                          {item.name} | {item.modelName}
+                        </h3>
+                        <span className="text-sm font-bold text-pink-300">₹{item.price}</span>
                       </div>
 
                       <div className="mt-2 flex gap-2 text-xs text-zinc-400">
@@ -190,12 +181,28 @@ export default function Checkout() {
 
                     <div className="mt-3 flex items-center justify-between">
                       <div className="flex items-center rounded-full border border-zinc-700 bg-zinc-900 px-2 py-1 text-sm">
-                        <button className="px-2 text-zinc-400">−</button>
-                        <span className="px-2">{item.qty}</span>
-                        <button className="px-2 text-zinc-400">+</button>
+                        <button
+                          className="px-2 text-zinc-400 cursor-pointer"
+                          disabled={item.qtyOrdered == 1}
+                          onClick={() => qtyChangeHandler(item, -1)}
+                        >
+                          −
+                        </button>
+                        <span className="px-2">{item.qtyOrdered}</span>
+                        <button
+                          className="px-2 text-zinc-400 cursor-pointer"
+                          disabled={item.qtyOrdered == item.stock}
+                          onClick={() => qtyChangeHandler(item, 1)}
+                        >
+                          +
+                        </button>
                       </div>
 
-                      <button className="text-xs text-red-400 transition hover:text-red-300">
+                      <button
+                        className="text-xs text-red-400 transition hover:text-red-300 cursor-pointer"
+                        onClick={() => removeProductHandler(item.id)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} className="mr-1" />
                         Remove
                       </button>
                     </div>
@@ -204,15 +211,15 @@ export default function Checkout() {
               ))}
             </div>
 
-            <div className="mt-6 rounded-2xl border border-dashed border-zinc-700 bg-zinc-950/60 p-4">
+            <div className="mt-6 rounded-2xl border border-dashed border-zinc-700 bg-white p-4">
               <div className="flex gap-3">
                 <input
                   type="text"
                   placeholder="Apply coupon code"
-                  className="h-12 flex-1 rounded-xl border border-zinc-700 bg-zinc-900 px-4 text-sm outline-none transition placeholder:text-zinc-500 focus:border-lime-400"
+                  className="h-12 flex-1 rounded-xl border border-zinc-700 px-4 text-sm outline-none transition placeholder:text-zinc-500 focus:border-pink-400 focus:ring-4 focus:ring-pink-400/10"
                 />
 
-                <button className="rounded-xl bg-lime-400 px-5 text-sm font-bold text-black transition hover:scale-[1.02]">
+                <button className="rounded-xl bg-pink-400 px-5 cursor-pointer text-sm font-bold text-black transition hover:bg-pink-300">
                   Apply
                 </button>
               </div>
@@ -225,11 +232,11 @@ export default function Checkout() {
 
               <div className="flex items-center justify-between border-t border-zinc-800 pt-4 text-lg font-black">
                 <span>Total</span>
-                <span className="text-lime-300">₹{total}</span>
+                <span className="text-pink-500">₹{total}</span>
               </div>
             </div>
 
-            <button className="mt-6 flex h-14 w-full items-center justify-center rounded-2xl bg-lime-400 text-base font-black text-black transition hover:scale-[1.01] hover:bg-lime-300 active:scale-[0.99]">
+            <button className="mt-6 flex h-14 w-full items-center justify-center cursor-pointer rounded-2xl bg-pink-400 text-base font-black text-black transition hover:bg-pink-300 active:scale-[0.99]">
               Place Order
             </button>
 
@@ -244,27 +251,40 @@ export default function Checkout() {
   );
 }
 
-function Input({ label, placeholder }) {
+function Input({ label, placeholder }: { label: string; placeholder: string }) {
   return (
     <div>
-      <label className="mb-2 block text-sm font-medium text-zinc-300">{label}</label>
+      <label className="mb-2 block text-sm font-medium text-zinc-800">{label}</label>
 
       <input
         type="text"
         placeholder={placeholder}
-        className="h-12 w-full rounded-2xl border border-zinc-700 bg-zinc-950 px-4 text-sm outline-none transition placeholder:text-zinc-500 focus:border-lime-400 focus:ring-4 focus:ring-lime-400/10"
+        className="h-12 w-full rounded-2xl border border-zinc-700 px-4 text-sm outline-none transition placeholder:text-zinc-500 focus:border-pink-400 focus:ring-4 focus:ring-pink-400/10"
       />
     </div>
   );
 }
 
-function PaymentCard({ title, subtitle, active = false }) {
+function PaymentCard({
+  id,
+  title,
+  selectedPayment,
+  setSelectedPayment,
+  subtitle,
+}: {
+  id: number;
+  title: string;
+  selectedPayment: number;
+  setSelectedPayment: React.Dispatch<React.SetStateAction<number>>;
+  subtitle: string;
+}) {
   return (
     <button
+      onClick={() => setSelectedPayment(id)}
       className={`w-full rounded-2xl border p-4 text-left transition ${
-        active
-          ? 'border-lime-400 bg-lime-400/10'
-          : 'border-zinc-700 bg-zinc-950 hover:border-zinc-500'
+        id == selectedPayment
+          ? 'border-pink-400 bg-pink-400/10'
+          : 'border-zinc-700 bg-white hover:border-zinc-500'
       }`}
     >
       <div className="flex items-start justify-between gap-4">
@@ -275,7 +295,7 @@ function PaymentCard({ title, subtitle, active = false }) {
 
         <div
           className={`mt-1 h-5 w-5 rounded-full border-2 ${
-            active ? 'border-lime-400 bg-lime-400' : 'border-zinc-600'
+            id == selectedPayment ? 'border-pink-400 bg-pink-400' : 'border-zinc-600'
           }`}
         />
       </div>
@@ -283,11 +303,19 @@ function PaymentCard({ title, subtitle, active = false }) {
   );
 }
 
-function Row({ label, value, highlight = false }) {
+function Row({
+  label,
+  value,
+  highlight = false,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
   return (
     <div className="flex items-center justify-between">
-      <span className="text-zinc-400">{label}</span>
-      <span className={highlight ? 'font-semibold text-lime-300' : ''}>{value}</span>
+      <span className="font-medium text-zinc-800">{label}</span>
+      <span className={highlight ? 'font-semibold text-pink-500' : ''}>{value}</span>
     </div>
   );
 }

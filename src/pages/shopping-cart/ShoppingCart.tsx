@@ -1,4 +1,11 @@
-import { faPlus, faMinus, faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlus,
+  faMinus,
+  faHeart,
+  faTrash,
+  faCartArrowDown,
+  faRightFromBracket,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const BASE_URL = 'https://d2n41bjlvqia14.cloudfront.net'; // CloudFront/S3 base
@@ -18,11 +25,11 @@ const ShoppingCart = () => {
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-lime-400/20 bg-zinc-950 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-              {/* <ShoppingBag className="h-3.5 w-3.5" /> */}
+              <FontAwesomeIcon icon={faCartArrowDown} />
               Shopping Cart
             </div>
 
-            <h1 className="text-4xl font-black tracking-tight md:text-5xl">Your Drip Collection</h1>
+            <h1 className="text-3xl font-black tracking-tight md:text-4xl">Your Drip Collection</h1>
 
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400 md:text-base">
               Review your streetwear picks before heading to checkout. Limited drops don’t stay in
@@ -36,10 +43,11 @@ const ShoppingCart = () => {
                 Continue Shopping
               </button>
             </Link>
-
-            <button className="rounded-2xl bg-zinc-800 text-white px-5 py-3 text-sm text-black transition hover:scale-[1.02] hover:bg-zinc-950">
-              Checkout Now
-            </button>
+            <Link to="/checkout">
+              <button className="rounded-2xl bg-zinc-800 text-white px-5 py-3 text-sm text-black transition hover:scale-[1.02] hover:bg-zinc-950">
+                Checkout Now
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -146,27 +154,12 @@ const ShoppingCart = () => {
                 </div>
               </div>
             </div>
-
-            <div className="mt-6 rounded-2xl border border-dashed border-zinc-700 bg-zinc-950 p-4">
-              <label className="mb-3 block text-sm font-semibold text-white">Promo Code</label>
-
-              <div className="flex gap-3">
-                <input
-                  type="text"
-                  placeholder="MONKEY20"
-                  className="h-12 flex-1 rounded-2xl border border-zinc-700 bg-zinc-900 px-4 text-sm outline-none transition text-white placeholder:text-zinc-500 focus:border-pink-400"
-                />
-
-                <button className="rounded-2xl bg-white px-5 text-sm text-black transition hover:bg-pink-300">
-                  Apply
-                </button>
-              </div>
-            </div>
-
-            <button className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-pink-400 text-base font-black text-black  hover:bg-pink-500">
-              Proceed To Checkout
-              {/* <ArrowRight className="h-5 w-5" /> */}
-            </button>
+            <Link to="/checkout">
+              <button className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-pink-400 text-base font-black text-black  hover:bg-pink-300">
+                Proceed To Checkout
+                <FontAwesomeIcon icon={faRightFromBracket} />
+              </button>
+            </Link>
 
             <div className="mt-6 rounded-2xl border border-pink-400/10 bg-pink-400/5 p-4">
               <div className="flex items-start gap-3">
