@@ -9,6 +9,7 @@ const FancySearch = () => {
     <form onSubmit={submitHandler}>
       <div className="group relative mr-4 w-md">
         <input
+          aria-label="search-anything"
           autoComplete="off"
           name="search"
           id="search"
