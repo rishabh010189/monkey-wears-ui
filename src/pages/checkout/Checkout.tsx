@@ -3,15 +3,21 @@ import fastDelivery from '../../../assets/img/fast-delivery-icon.webp';
 import useCheckout from '../../hooks/checkout/useCheckout';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import type { ICheckoutForm } from '../../interfaces/checkoutForm.interface';
 const BASE_URL = 'https://d2n41bjlvqia14.cloudfront.net'; // CloudFront/S3 base
 
 export default function Checkout() {
   const {
     cartItems,
     discount,
+    form,
+    flagError,
+    isLoading,
+    placeOrderHandler,
     qtyChangeHandler,
     removeProductHandler,
     selectedPayment,
+    handleChange,
     setSelectedPayment,
     shipping,
     subtotal,
@@ -66,13 +72,40 @@ export default function Checkout() {
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
-                <Input label="First Name" placeholder="Your good name" />
-                <Input label="Last Name" placeholder="Your good surname" />
+                <Input
+                  id="firstName"
+                  label="First Name"
+                  form={form}
+                  flagError={flagError}
+                  handleChange={handleChange}
+                  placeholder="Your good name"
+                />
+                <Input
+                  id="lastName"
+                  label="Last Name"
+                  placeholder="Your good surname"
+                  form={form}
+                  handleChange={handleChange}
+                />
                 <div className="md:col-span-2">
-                  <Input label="Email" placeholder="you@example.com" />
+                  <Input
+                    id="email"
+                    label="Email"
+                    placeholder="you@example.com"
+                    form={form}
+                    flagError={flagError}
+                    handleChange={handleChange}
+                  />
                 </div>
                 <div className="md:col-span-2">
-                  <Input label="Phone Number" placeholder="+91 9876543210" />
+                  <Input
+                    id="phone"
+                    label="Phone Number"
+                    placeholder="+91 9876543210"
+                    form={form}
+                    flagError={flagError}
+                    handleChange={handleChange}
+                  />
                 </div>
               </div>
             </section>
@@ -85,12 +118,40 @@ export default function Checkout() {
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="md:col-span-2">
-                  <Input label="Address Line" placeholder="House no, street, locality" />
+                  <Input
+                    id="addressLine1"
+                    label="Address Line"
+                    placeholder="House no, street, locality"
+                    form={form}
+                    flagError={flagError}
+                    handleChange={handleChange}
+                  />
                 </div>
 
-                <Input label="City" placeholder="Gurgaon" />
-                <Input label="State" placeholder="Haryana" />
-                <Input label="PIN Code" placeholder="122017" />
+                <Input
+                  id="city"
+                  label="City"
+                  placeholder="Gurgaon"
+                  form={form}
+                  flagError={flagError}
+                  handleChange={handleChange}
+                />
+                <Input
+                  id="state"
+                  label="State"
+                  placeholder="Haryana"
+                  form={form}
+                  flagError={flagError}
+                  handleChange={handleChange}
+                />
+                <Input
+                  id="pincode"
+                  label="PIN Code"
+                  placeholder="122017"
+                  form={form}
+                  flagError={flagError}
+                  handleChange={handleChange}
+                />
 
                 <div className="flex justify-end items-center">
                   <img src={fastDelivery} className="w-20 h-20" />
@@ -236,7 +297,11 @@ export default function Checkout() {
               </div>
             </div>
 
-            <button className="mt-6 flex h-14 w-full items-center justify-center cursor-pointer rounded-2xl bg-pink-400 text-base font-black text-black transition hover:bg-pink-300 active:scale-[0.99]">
+            <button
+              disabled={isLoading}
+              onClick={placeOrderHandler}
+              className="mt-6 flex h-14 w-full items-center justify-center cursor-pointer rounded-2xl bg-pink-400 text-base font-black text-black transition hover:bg-pink-300 active:scale-[0.99]"
+            >
               Place Order
             </button>
 
@@ -247,19 +312,43 @@ export default function Checkout() {
           </aside>
         </div>
       </div>
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="h-14 w-14 animate-spin rounded-full border-4 border-white/20 border-t-white" />
+        </div>
+      )}
     </div>
   );
 }
 
-function Input({ label, placeholder }: { label: string; placeholder: string }) {
+function Input({
+  id,
+  label,
+  form,
+  flagError,
+  placeholder,
+  handleChange,
+}: {
+  id: keyof ICheckoutForm;
+  label: string;
+  form: ICheckoutForm;
+  flagError?: boolean;
+  placeholder: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement, Element>) => void;
+}) {
   return (
     <div>
       <label className="mb-2 block text-sm font-medium text-zinc-800">{label}</label>
 
       <input
         type="text"
+        name={id}
         placeholder={placeholder}
-        className="h-12 w-full rounded-2xl border border-zinc-700 px-4 text-sm outline-none transition placeholder:text-zinc-500 focus:border-pink-400 focus:ring-4 focus:ring-pink-400/10"
+        className={`h-12 w-full rounded-2xl border px-4 text-sm outline-none 
+          transition placeholder:text-zinc-500 focus:border-pink-400 focus:ring-4 focus:ring-pink-400/10
+          ${flagError && form[id] == '' ? 'border-red-600 ring-4 ring-red-400/10' : 'border-zinc-700'}`}
+        value={form[id]}
+        onChange={handleChange}
       />
     </div>
   );

@@ -85,7 +85,7 @@ const ShoppingCart = () => {
                         <div className="flex flex-wrap gap-2">
                           <Tag label={`Size ${item.size}`} />
                           <Tag label={item.color} />
-                          <Tag label="Premium Cotton" />
+                          <Tag label={item.productCategory} />
                         </div>
 
                         <div className="mt-6 flex items-end gap-3">
