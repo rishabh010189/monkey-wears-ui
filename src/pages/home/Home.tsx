@@ -15,7 +15,6 @@ const Home = () => {
       </div>
     );
   if (error) return <p>Error occurred</p>;
-  console.log(data);
   return (
     <>
       <Helmet>

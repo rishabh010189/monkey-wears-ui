@@ -82,11 +82,15 @@ const useCheckout = () => {
       };
 
       try {
-        const { data } = await placeOrderTrigger(requestBody);
-        dispatch(clearCart());
-        navigate('/orderSuccess', {
-          state: data,
-        });
+        const res = await placeOrderTrigger(requestBody);
+        if (!res.error) {
+          dispatch(clearCart());
+          navigate('/orderSuccess', {
+            state: res.data,
+          });
+        } else {
+          throw res.error;
+        }
       } catch (err) {
         console.log(err);
       }
