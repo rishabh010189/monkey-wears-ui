@@ -53,7 +53,7 @@ const ProductListing = () => {
               </div>
             ) : (
               <div className="w-full mt-24 justify-items-center items-center flex-column">
-                <img src={emptyWardrobe} className="w-2xs" />
+                <img alt="empty wardrobe image" src={emptyWardrobe} className="w-2xs" />
                 <div>Oops! seems like we ran out of style</div>
               </div>
             )}

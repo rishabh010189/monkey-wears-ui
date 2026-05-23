@@ -21,7 +21,7 @@ const ImageGallery = ({
             <img
               key={idx}
               src={`${BASE_URL}/images/${img}`}
-              alt=""
+              alt={`${selectedVariant.modelName} product images`}
               onClick={() => setSelectedImage(img)}
               className={`w-16 h-20 object-cover rounded cursor-pointer border ${
                 selectedImage === img ? 'border-black' : 'border-gray-200'

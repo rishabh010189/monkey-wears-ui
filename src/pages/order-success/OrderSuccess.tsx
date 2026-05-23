@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import useOrderSuccess from '../../hooks/order-success/useOrderSuccess';
 
 const OrderSuccess = () => {
@@ -79,7 +80,7 @@ const OrderSuccess = () => {
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
           <button className="flex-1 bg-black text-white py-3 rounded-2xl font-medium hover:opacity-90 transition">
-            Continue Shopping
+            <Link to="/">Continue Shopping</Link>
           </button>
 
           <button className="flex-1 border border-gray-300 text-gray-800 py-3 rounded-2xl font-medium hover:bg-gray-100 transition">

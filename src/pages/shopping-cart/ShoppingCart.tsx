@@ -122,7 +122,7 @@ const ShoppingCart = () => {
             </div>
           ) : (
             <div className="w-full mt-24 justify-items-center items-center flex-column">
-              <img src={emptyWardrobe} className="w-2xs" />
+              <img alt="empty wardrobe image" src={emptyWardrobe} className="w-2xs" />
               <div>Your cart looks empty</div>
             </div>
           )}

@@ -11,7 +11,7 @@ const Header = () => {
     <>
       {showDisclaimer && (
         <div className="bg-zinc-950 text-white py-1 relative">
-          <div className="text-center">
+          <div className="text-center px-12">
             This is a dummy project inspired by the Souled store and is not meant for real world
             business use cases. If you really wish to check out the really cool products, please{' '}
             <a
@@ -50,7 +50,7 @@ const Header = () => {
           </div>
           <div className="w-2/12 flex justify-center">
             <Link to="/">
-              <img src={logo} className="w-24" />
+              <img alt="Monkey wears brand logo" src={logo} className="w-24" />
             </Link>
           </div>
           <div className="w-5/12 justify-end items-center flex">

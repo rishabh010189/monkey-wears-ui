@@ -13,7 +13,10 @@ const BannerCarousel = ({ category }: { category?: string }) => {
         {[1, 2, 3].map((i) => (
           <SwiperSlide>
             <div className="flex justify-center items-center">
-              <img src={`${BASE_URL}/banner/${fallback_category}/banner_${i}.avif`} />
+              <img
+                alt="banner image"
+                src={`${BASE_URL}/banner/${fallback_category}/banner_${i}.avif`}
+              />
             </div>
           </SwiperSlide>
         ))}

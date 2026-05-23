@@ -24,8 +24,17 @@ const FancySearch = () => {
           icon={isLoading ? faSpinner : faMagnifyingGlass}
           className={`text-lg text-gray-500 absolute right-3 top-3 ${isLoading ? 'animate-spin' : ''}`}
         />
+        {!error && (!searchResults || searchResults.length == 0) && (
+          <div className="absolute w-full border border-gray-500 z-10 rounded-b-2xl bg-white text-center border-t-0 pt-4 invisible opacity-0 peer-focus:visible peer-focus:opacity-100">
+            <div className="max-h-[420px] overflow-y-auto">
+              <div className="flex min-w-0 flex-1 flex-col justify-center py-2">
+                No matching results found
+              </div>
+            </div>
+          </div>
+        )}
 
-        {!error && searchResults && searchResults.length && (
+        {!error && searchResults && searchResults.length > 0 && (
           <SearchSuggestions searchResults={searchResults} />
         )}
       </div>

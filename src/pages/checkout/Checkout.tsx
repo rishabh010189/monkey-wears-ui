@@ -4,6 +4,7 @@ import useCheckout from '../../hooks/checkout/useCheckout';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import type { ICheckoutForm } from '../../interfaces/checkoutForm.interface';
+import logo from '../../assets/img/logo-small.png';
 const BASE_URL = 'https://d2n41bjlvqia14.cloudfront.net'; // CloudFront/S3 base
 
 export default function Checkout() {
@@ -154,7 +155,7 @@ export default function Checkout() {
                 />
 
                 <div className="flex justify-end items-center">
-                  <img src={fastDelivery} className="w-20 h-20" />
+                  <img alt="fast delivery icon" src={fastDelivery} className="w-20 h-20" />
                 </div>
               </div>
             </section>
@@ -314,7 +315,7 @@ export default function Checkout() {
       </div>
       {isLoading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="h-14 w-14 animate-spin rounded-full border-4 border-white/20 border-t-white" />
+          <img alt="loading spinner" src={logo} className="w-24 animate-spin" />
         </div>
       )}
     </div>

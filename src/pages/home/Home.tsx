@@ -3,6 +3,7 @@ import ProductCard from '../../components/product-card/ProductCard';
 import logo from '../../assets/img/logo-small.png';
 import { Link } from 'react-router-dom';
 import { useGetProductsQuery } from '../../features/api/endpoints/products.api';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   const { data, isLoading, error } = useGetProductsQuery();
@@ -10,13 +11,21 @@ const Home = () => {
   if (isLoading)
     return (
       <div className="flex justify-center items-center h-[60vh]">
-        <img src={logo} className="w-24 animate-spin" />
+        <img alt="loading spinner" src={logo} className="w-24 animate-spin" />
       </div>
     );
   if (error) return <p>Error occurred</p>;
   console.log(data);
   return (
     <>
+      <Helmet>
+        <title>Monkey Wears | Premium Streetwear</title>
+
+        <meta
+          name="description"
+          content="Shop premium oversized hoodies, joggers and streetwear at Monkey Wears."
+        />
+      </Helmet>
       {/* Banner Images */}
       <Banner />
 
